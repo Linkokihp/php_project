@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 08. Jun 2021 um 08:31
--- Server-Version: 10.4.17-MariaDB
--- PHP-Version: 8.0.2
+-- Erstellungszeit: 12. Jun 2021 um 08:30
+-- Server-Version: 10.4.18-MariaDB
+-- PHP-Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -45,8 +45,9 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `user_id`, `title`, `slug`, `views`, `image`, `body`, `published`, `created_at`, `updated_at`) VALUES
-(1, 1, '5 Habits that can improve your life', '5-habits-that-can-improve-your-life', 0, 'banner.jpg', 'Read every day', 1, '2018-02-03 06:58:02', '2018-02-01 18:14:31'),
-(2, 1, 'Second post on LifeBlog', 'second-post-on-lifeblog', 0, 'banner.jpg', 'This is the body of the second post on this site', 0, '2018-02-02 10:40:14', '2018-02-01 12:04:36');
+(1, 1, '5 Habits that can improve your life', '5-habits-that-can-improve-your-life', 0, '', '<p>Read every day or die tryin</p>\r\n', 0, '2021-06-10 22:37:46', '2021-06-10 22:37:16'),
+(2, 1, 'Second post on LifeBlog', 'second-post-on-lifeblog', 0, 'banner.jpg', 'This is the body of the second post on this site', 0, '2021-06-10 22:37:47', '2018-02-01 12:04:36'),
+(3, 1, 'TEST', 'test', 0, '', '<p>hallo TEST<strong>sasasafsaf</strong></p>\r\n', 1, '2021-06-10 22:39:11', '2021-06-10 22:39:05');
 
 -- --------------------------------------------------------
 
@@ -65,8 +66,7 @@ CREATE TABLE `post_topic` (
 --
 
 INSERT INTO `post_topic` (`id`, `post_id`, `topic_id`) VALUES
-(1, 1, 1),
-(2, 2, 2);
+(0, 3, 4);
 
 -- --------------------------------------------------------
 
@@ -85,9 +85,8 @@ CREATE TABLE `topics` (
 --
 
 INSERT INTO `topics` (`id`, `name`, `slug`) VALUES
-(1, 'Inspiration', 'inspiration'),
-(2, 'Motivation', 'motivation'),
-(3, 'Diary', 'diary');
+(3, 'Diary', 'diary'),
+(4, 'Schweiz', 'schweiz');
 
 -- --------------------------------------------------------
 
@@ -110,7 +109,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `role`, `password`, `created_at`, `updated_at`) VALUES
-(1, 'Awa', 'info@codewithawa.com', 'Admin', 'mypassword', '2018-01-08 11:52:58', '2018-01-08 11:52:58');
+(1, 'admin', 'phil.koch@gmx.ch', 'Admin', '21232f297a57a5a743894a0e4a801fc3', '2021-06-10 10:52:58', '2021-06-11 10:52:58');
 
 --
 -- Indizes der exportierten Tabellen
@@ -152,19 +151,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT für Tabelle `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT für Tabelle `topics`
 --
 ALTER TABLE `topics`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints der exportierten Tabellen

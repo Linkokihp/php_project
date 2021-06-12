@@ -1,5 +1,6 @@
 <?php require_once('config.php') ?>
 <?php require_once( ROOT_PATH . '/includes/public_functions.php') ?>
+<?php require_once( ROOT_PATH . '/includes/login_be.php') ?>
 <!-- Retrieve all posts from database  -->
 <?php $posts = getPublishedPosts(); ?>
 <?php require_once(ROOT_PATH . '/includes/head_section.php') ?>
