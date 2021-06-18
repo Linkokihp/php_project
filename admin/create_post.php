@@ -2,6 +2,12 @@
 <?php  include(ROOT_PATH . '/admin/includes/admin_functions.php'); ?>
 <?php  include(ROOT_PATH . '/admin/includes/post_functions.php'); ?>
 <?php include(ROOT_PATH . '/admin/includes/head_section.php'); ?>
+<?php
+if (!isLoggedIn()) {
+	$_SESSION['msg'] = "You must log in first";
+	header('location: ../login.php');
+}
+?>
 <!-- Get all topics -->
 <?php $topics = getAllTopics();	?>
 	<title>Admin | Create Post</title>

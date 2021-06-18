@@ -13,6 +13,17 @@ $topic_id = 0;
 $isEditingTopic = false;
 $topic_name = "";
 
+
+function isLoggedIn()
+{
+	if (isset($_SESSION['user'])) {
+		return true;
+	}else{
+		return false;
+	}
+}
+
+
 /* - - - - - - - - - - 
 -  Admin users actions
 - - - - - - - - - - -*/
@@ -77,12 +88,12 @@ function createAdmin($request_values){
 	}
 	// register user if there are no errors in the form
 	if (count($errors) == 0) {
-		$password = md5($password);//encrypt the password before saving in the database
+		$password = password_hash($password,PASSWORD_DEFAULT);//encrypt the password before saving in the database
 		$query = "INSERT INTO users (username, email, role, password, created_at, updated_at) 
 				  VALUES('$username', '$email', '$role', '$password', now(), now())";
 		mysqli_query($conn, $query);
 
-		$_SESSION['message'] = "Admin user created successfully";
+		$_SESSION['message'] = "Author user created successfully";
 		header('location: users.php');
 		exit(0);
 	}
@@ -126,7 +137,7 @@ function updateAdmin($request_values){
 	// register user if there are no errors in the form
 	if (count($errors) == 0) {
 		//encrypt the password (security purposes)
-		$password = md5($password);
+		$password = password_hash($password,PASSWORD_DEFAULT);
 
 		$query = "UPDATE users SET username='$username', email='$email', role='$role', password='$password' WHERE id=$admin_id";
 		mysqli_query($conn, $query);
@@ -159,6 +170,10 @@ function getAdminUsers(){
 
 	return $users;
 }
+
+
+
+
 /* * * * * * * * * * * * * * * * * * * * *
 * - Escapes form submitted value, hence, preventing SQL injection
 * * * * * * * * * * * * * * * * * * * * * */
@@ -170,6 +185,7 @@ function esc(String $value){
 	$val = mysqli_real_escape_string($conn, $value);
 	return $val;
 }
+
 // Receives a string like 'Some Sample String'
 // and returns 'some-sample-string'
 function makeSlug(String $string){

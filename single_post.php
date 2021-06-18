@@ -30,12 +30,8 @@
 			<?php endif ?>
 			</div>
 			<!-- // full post div -->
-			
-			<!-- comments section -->
-			<!--  coming soon ...  -->
 		</div>
 		<!-- // Page wrapper -->
-
 		<!-- post sidebar -->
 		<div class="post-sidebar">
 			<div class="card">

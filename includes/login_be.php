@@ -2,7 +2,7 @@
 	// variable declaration
 	$username = "";
 	$email    = "";
-	$errors = array(); 
+	$errors = array();
 
 	// REGISTER USER
 	if (isset($_POST['reg_user'])) {
@@ -36,7 +36,7 @@
 		}
 		// register user if there are no errors in the form
 		if (count($errors) == 0) {
-			$password = md5($password_1);//encrypt the password before saving in the database
+			$password = password_hash($password_1,PASSWORD_DEFAULT);//encrypt the password before saving in the database
 			$query = "INSERT INTO users (username, email, password, created_at, updated_at) 
 					  VALUES('$username', '$email', '$password', now(), now())";
 			mysqli_query($conn, $query);
@@ -70,37 +70,41 @@
 		if (empty($username)) { array_push($errors, "Username required"); }
 		if (empty($password)) { array_push($errors, "Password required"); }
 		if (empty($errors)) {
-			$password = md5($password); // encrypt password
-			$sql = "SELECT * FROM users";
-
+			$sql = "SELECT * FROM users WHERE username='$username'";
 			$result = mysqli_query($conn, $sql);
-			if (mysqli_num_rows($result) > 0) {
-				// get id of created user
-				$reg_user_id = mysqli_fetch_assoc($result)['id']; 
+			$numRows = mysqli_num_rows($result);
 
-				// put logged in user into session array
-				$_SESSION['user'] = getUserById($reg_user_id); 
+			// printf($numRows); //DEBUG---------
 
-				// if user is admin, redirect to admin area
-				if ( in_array($_SESSION['user']['role'], ["Admin", "Author"])) {
-					$_SESSION['message'] = "You are now logged in";
-					// redirect to admin area
-					header('location: ' . BASE_URL . '/admin/dashboard.php');
-					exit(0);
+			if (mysqli_num_rows($result) >= 1) {
+				$row = mysqli_fetch_assoc($result);
+				if(password_verify($password,$row['password'])){
+					// get id of created user
+					$reg_user_id = $row['id'];
+
+					// put logged in user into session array
+					$_SESSION['user'] = getUserById($reg_user_id); 
+
+					// if user is admin, redirect to admin area
+					if ( in_array($_SESSION['user']['role'], ["Admin", "Author"])) {
+						$_SESSION['message'] = "You are now logged in";
+						// redirect to admin area
+						header('location: ' . BASE_URL . '/admin/dashboard.php');
+						exit(0);
+					}
 				} else {
-					$_SESSION['message'] = "You are now logged in";
-					// redirect to public area
-					header('location: index.php');				
-					exit(0);
-				}
-			} else {
-				array_push($errors, 'Wrong credentials');
-			}
+					array_push($errors, 'Wrong credentials');
+				} 
+		} else {
+			array_push($errors, 'No User found');
 		}
 	}
+}
+
+
 	// escape value from form
 	function esc(String $value)
-	{	
+	{
 		// bring the global db connect object into function
 		global $conn;
 
@@ -109,6 +113,7 @@
 
 		return $val;
 	}
+
 	// Get user info from user id
 	function getUserById($id)
 	{

@@ -2,7 +2,12 @@
 <?php  include(ROOT_PATH . '/admin/includes/admin_functions.php'); ?>
 <?php  include(ROOT_PATH . '/admin/includes/post_functions.php'); ?>
 <?php include(ROOT_PATH . '/admin/includes/head_section.php'); ?>
-
+<?php
+if (!isLoggedIn()) {
+	$_SESSION['msg'] = "You must log in first";
+	header('location: ../login.php');
+}
+?>
 <!-- Get all admin posts from DB -->
 <?php $posts = getAllPosts(); ?>
 	<title>Admin | Manage Posts</title>
@@ -26,8 +31,8 @@
 				<table class="table">
 						<thead>
 						<th>N</th>
-						<th>Title</th>
 						<th>Author</th>
+						<th>Title</th>
 						<th>Views</th>
 						<!-- Only Admin can publish/unpublish post -->
 						<?php if ($_SESSION['user']['role'] == "Admin"): ?>

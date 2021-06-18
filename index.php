@@ -4,47 +4,35 @@
 <!-- Retrieve all posts from database  -->
 <?php $posts = getPublishedPosts(); ?>
 <?php require_once(ROOT_PATH . '/includes/head_section.php') ?>
-	<title>Sandy's hairy Roadtrip | Home </title>
+	<title>Eurotrip - Blog | Home</title>
 </head>
 <body>
-	<!-- container - wraps whole page -->
-	<div class="container">
 		<!-- navbar -->
 		<?php include(ROOT_PATH . '/includes/navbar.php') ?>
 
         <!-- banner -->
         <?php include(ROOT_PATH . '/includes/banner.php') ?>
 
-		<!-- Page content -->
-		<div class="content">
-			<h2 class="content-title">Recent Articles</h2>
-			<hr>
-			<?php foreach ($posts as $post): ?>
-                <div class="post" style="margin-left: 0px;">
-                    <img src="<?php echo BASE_URL . '/static/images/' . $post['image']; ?>" class="post_image" alt="">
-
-                    <?php if (isset($post['topic']['name'])): ?>
-                        <a 
-                            href="<?php echo BASE_URL . '/filtered_posts.php?topic=' . $post['topic']['id'] ?>"
-                            class="btn category">
-                            <?php echo $post['topic']['name'] ?>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <?php foreach ($posts as $post): ?>
+                    <!-- Post preview-->
+                    <div class="post-preview" background="<?php echo BASE_URL . '/static/images/' . $post['image']; ?>">
+                        <a href="single_post.php?post-slug=<?php echo $post['slug']; ?>">
+                            <h2 class="post-title"><?php echo $post['title'] ?></h2>
+                            <h3 class="post-subtitle"><?php echo html_entity_decode(substr($post['body'],0,200)) . '...' ?></h3>
                         </a>
-                    <?php endif ?>
-
-                    <a href="single_post.php?post-slug=<?php echo $post['slug']; ?>">
-                        <div class="post_info">
-                            <h3><?php echo $post['title'] ?></h3>
-                            <div class="info">
-                                <span><?php echo date("F j, Y ", strtotime($post["created_at"])); ?></span>
-                                <span class="read_more">Read more...</span>
-                            </div>
-                        </div>
-                    </a>
+                        <p class="post-meta">Posted by USERNAME on <?php echo date("F j, Y ", strtotime($post["created_at"])); ?> Category:<?php if (isset($post['topic']['name'])): ?>
+                            <a href="<?php echo BASE_URL . '/filtered_posts.php?topic=' . $post['topic']['id'] ?>" class="btn category"><?php echo $post['topic']['name'] ?></a>
+                            <?php endif ?></p>
+                    </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    <?php endforeach ?>
                 </div>
-            <?php endforeach ?>
-		</div>
-		<!-- // Page content -->
-
-		<!-- footer -->
-		<?php include(ROOT_PATH . '/includes/footer.php') ?>
-        
+            </div>
+        </div>
+<!-- footer -->
+<?php include(ROOT_PATH . '/includes/footer.php') ?>

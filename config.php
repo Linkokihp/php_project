@@ -9,5 +9,5 @@
 	}
 
 	define ('ROOT_PATH', 'C:\xampp\htdocs\php_project');
-	define('BASE_URL', 'http://localhost/php_project/');
+	define('BASE_URL', 'http://localhost/php_project');
 ?>

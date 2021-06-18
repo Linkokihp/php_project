@@ -1,9 +1,15 @@
 <?php  include('../config.php'); ?>
 <?php  include(ROOT_PATH . '/admin/includes/admin_functions.php'); ?>
+<?php
+if (!isLoggedIn()) {
+	$_SESSION['msg'] = "You must log in first";
+	header('location: ../login.php');
+}
+?>
 <?php 
 	// Get all admin users from DB
 	$admins = getAdminUsers();
-	$roles = ['Admin', 'Author'];				
+	$roles = ['Author']; //'Admin', 			
 ?>
 <?php include(ROOT_PATH . '/admin/includes/head_section.php'); ?>
 	<title>Admin | Manage users</title>
@@ -53,21 +59,48 @@
 		<div class="table-div">
 			<!-- Display notification message -->
 			<?php include(ROOT_PATH . '/includes/messages.php') ?>
+			<!-- Admin -->
+			<table class="table">
+				<thead>
+					<th>N</th>
+					<th>Admin</th>
+					<th>Role</th>
+					<th colspan="2">Action</th>
+				</thead>
+				<tbody>
+				<?php foreach ($admins as $key => $admin): ?>
+					<?php if ($admin['role'] === 'Admin'):?>
+					<tr>
+						<td><?php echo $key + 1; ?></td>
+						<td>
+							<?php echo $admin['username']; ?>, &nbsp;
+							<?php echo $admin['email']; ?>	
+						</td>
+						<td><?php echo $admin['role']; ?></td>
+						<td>
+							<a class="fa fa-pencil btn edit"
+								href="users.php?edit-admin=<?php echo $admin['id'] ?>">
+							</a>
+						</td>
+					</tr>
+					<?php endif ?>
+				<?php endforeach ?>
+				</tbody>
+			</table>
 
-			<?php if (empty($admins)): ?>
-				<h1>No admins in the database.</h1>
-			<?php else: ?>
-				<table class="table">
-					<thead>
-						<th>N</th>
-						<th>Admin</th>
-						<th>Role</th>
-						<th colspan="2">Action</th>
-					</thead>
-					<tbody>
+			<!-- Author -->
+			<table class="table">
+				<thead>
+					<th>N</th>
+					<th>Author</th>
+					<th>Role</th>
+					<th colspan="2">Action</th>
+				</thead>
+				<tbody>
 					<?php foreach ($admins as $key => $admin): ?>
+						<?php if ($admin['role'] === 'Author'): ?>
 						<tr>
-							<td><?php echo $key + 1; ?></td>
+							<td><?php echo $key; ?></td>
 							<td>
 								<?php echo $admin['username']; ?>, &nbsp;
 								<?php echo $admin['email']; ?>	
@@ -80,14 +113,14 @@
 							</td>
 							<td>
 								<a class="fa fa-trash btn delete" 
-								    href="users.php?delete-admin=<?php echo $admin['id'] ?>">
+									href="users.php?delete-admin=<?php echo $admin['id'] ?>">
 								</a>
 							</td>
 						</tr>
+						<?php endif ?>
 					<?php endforeach ?>
-					</tbody>
-				</table>
-			<?php endif ?>
+				</tbody>
+			</table>
 		</div>
 		<!-- // Display records from DB -->
 	</div>
