@@ -21,7 +21,7 @@ if (!isLoggedIn()) {
 		<!-- Middle form - to create and edit -->
 		<div class="action">
 			<h1 class="page-title">Create/Edit Topics</h1>
-			<form method="post" action="<?php echo BASE_URL . 'admin/topics.php'; ?>" >
+			<form method="post" action="<?php echo BASE_URL . '/admin/topics.php'; ?>" >
 				<!-- validation errors for the form -->
 				<?php include(ROOT_PATH . '/includes/errors.php') ?>
 				<!-- if editing topic, the id is required to identify that topic -->
