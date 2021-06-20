@@ -220,4 +220,19 @@ function togglePublishPost($post_id, $message)
 		exit(0);
 	}
 }
+
+
+/* * * * * * * * * * * * * * * *
+* Returns the amount of posts
+* * * * * * * * * * * * * * * * */
+function getAmtOfPosts(){
+	// use global $conn object in function
+	global $conn;
+	$sql = "SELECT * FROM posts";
+	$result = mysqli_query($conn, $sql);
+
+	$num_rows = mysqli_num_rows($result);
+	return $num_rows;
+}
 ?>
+
