@@ -7,39 +7,50 @@
 		$topic_id = $_GET['topic'];
 		$posts = getPublishedPostsByTopic($topic_id);
 	}
+
+	$roles = ['Admin','Author'];	
 ?>
-	<title>LifeBlog | Home </title>
+	<title>Euroblog | Home </title>
 </head>
 <body>
-<div class="container">
 <!-- Navbar -->
 	<?php include( ROOT_PATH . '/includes/navbar.php'); ?>
-<!-- // Navbar -->
-<!-- content -->
-<div class="content">
-	<h2 class="content-title">
-		Articles on <u><?php echo getTopicNameById($topic_id); ?></u>
-	</h2>
-	<hr>
-	<?php foreach ($posts as $post): ?>
-		<div class="post" style="margin-left: 0px;">
-			<img src="<?php echo BASE_URL . '/static/images/' . $post['image']; ?>" class="post_image" alt="">
-			<a href="single_post.php?post-slug=<?php echo $post['slug']; ?>">
-				<div class="post_info">
-					<h3><?php echo $post['title'] ?></h3>
-					<div class="info">
-						<span><?php echo date("F j, Y ", strtotime($post["created_at"])); ?></span>
-						<span class="read_more">Read more...</span>
+	<!-- Page Header-->
+	<header class="masthead" style="background-image: url('static/images/filteredpost.jpg')">
+		<div class="container position-relative px-4 px-lg-5">
+			<div class="row gx-4 gx-lg-5 justify-content-center">
+				<div class="col-md-10 col-lg-8 col-xl-7">
+					<div class="page-heading">
+						<h1><?php echo getTopicNameById($topic_id); ?></h1>
 					</div>
 				</div>
-			</a>
+			</div>
 		</div>
-	<?php endforeach ?>
-</div>
-<!-- // content -->
-</div>
-<!-- // container -->
-
-<!-- Footer -->
+	</header>
+	<!-- Main Content-->
+	<div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <?php foreach ($posts as $post): ?>
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <a href="single_post.php?post-slug=<?php echo $post['slug']; ?>">
+                            <h2 class="post-title"><?php echo $post['title'] ?></h2>
+                            <h3 class="post-subtitle"><?php echo html_entity_decode(substr($post['body'],0,200)) . '...' ?></h3>
+                        </a>
+                        <p class="post-meta">Posted by <?php echo $roles[$post['user_id'] -1]  ?>
+                            on 
+                            <?php echo date("F j, Y ", strtotime($post["created_at"])); ?> Category:
+                            <?php if (isset($post['topic']['name'])): ?>
+                            <a href="<?php echo BASE_URL . '/filtered_posts.php?topic=' . $post['topic']['id'] ?>" class="btn category"><?php echo $post['topic']['name'] ?></a>
+                            <?php endif ?>
+                        </p>
+                    </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    <?php endforeach ?>
+                </div>
+            </div>
+        </div>
+	<!-- Footer -->
 	<?php include( ROOT_PATH . '/includes/footer.php'); ?>
-<!-- // Footer -->

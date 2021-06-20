@@ -22,7 +22,7 @@
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <?php foreach ($posts as $post): ?>
                     <!-- Post preview-->
-                    <div class="post-preview" background="<?php echo BASE_URL . '/static/images/' . $post['image']; ?>">
+                    <div class="post-preview">
                         <a href="single_post.php?post-slug=<?php echo $post['slug']; ?>">
                             <h2 class="post-title"><?php echo $post['title'] ?></h2>
                             <h3 class="post-subtitle"><?php echo html_entity_decode(substr($post['body'],0,200)) . '...' ?></h3>

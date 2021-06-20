@@ -7,8 +7,8 @@
 	<title>Eurotrip - Blog | Contact</title>
 </head>
 <body>
-<!-- navbar -->
-<?php include(ROOT_PATH . '/includes/navbar.php') ?>
+	<!-- navbar -->
+	<?php include(ROOT_PATH . '/includes/navbar.php') ?>
 	<!-- Page Header-->
 	<header class="masthead" style="background-image: url('static/images/contact.jpg')">
 		<div class="container position-relative px-4 px-lg-5">

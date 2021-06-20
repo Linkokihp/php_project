@@ -7,13 +7,13 @@ if (!isLoggedIn()) {
 	header('location: ../login.php');
 }
 ?>
-<title>Admin | Dashboard</title>
+<title>Dashboard - Euroblog</title>
 </head>
 <body>
 	<div class="header">
 		<div class="logo">
 			<a href="<?php echo BASE_URL .'/admin/dashboard.php' ?>">
-				<h1>LifeBlog - Admin</h1>
+				<h1>Dashboard - Euroblog</h1>
 			</a>
 		</div>
 		<?php if (isset($_SESSION['user'])): ?>
