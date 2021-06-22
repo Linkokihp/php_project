@@ -1,16 +1,20 @@
-<?php  include('config.php'); ?>
+
+
+<!-- FILE NOT USED -->
+
+
+<?php include('config.php'); ?>
 <!-- Source code for handling registration and login -->
-<?php  include('includes/login_be.php'); ?>
+<?php include('includes/login_be.php'); ?>
 
 <?php include('includes/head_section.php'); ?>
 
-<title>LifeBlog | Sign up </title>
+<title>Euroblog | Sign up </title>
 </head>
 <body>
 <div class="container">
-	<!-- Navbar -->
-		<?php include( ROOT_PATH . '/includes/navbar.php'); ?>
-	<!-- // Navbar -->
+<!-- Navbar -->
+<?php include( ROOT_PATH . '/includes/navbar.php'); ?>
 
 	<div style="width: 40%; margin: 20px auto;">
 		<form method="post" action="register.php" >
@@ -27,7 +31,5 @@
 		</form>
 	</div>
 </div>
-<!-- // container -->
 <!-- Footer -->
-	<?php include( ROOT_PATH . '/includes/footer.php'); ?>
-<!-- // Footer -->
+<?php include( ROOT_PATH . '/includes/footer.php'); ?>

@@ -10,9 +10,7 @@
 <!-- Theme style -->
 <link rel="stylesheet" href="../static/css/AdminLTE.min.css">
 <link href="../static/css/admin_style.css" rel="stylesheet" />
-<!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-    page. However, you can choose any other skin. Make sure you
-    apply the skin class to the body tag so the changes take effect. -->
+<!-- AdminLTE Skins -->
 <link rel="stylesheet" href="../static/css/skins/skin-blue.min.css">
 <!-- Google Font -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">

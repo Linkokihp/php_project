@@ -9,8 +9,7 @@
 <body>
 		<!-- navbar -->
 		<?php include(ROOT_PATH . '/includes/navbar.php') ?>
-		<!-- Page content -->
-        <!-- Page Header-->
+        <!-- page Header-->
         <header class="masthead" style="background-image: url('static/images/about.jpg')">
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
@@ -22,7 +21,7 @@
                 </div>
             </div>
         </header>
-        <!-- Main Content-->
+        <!-- main Content-->
         <main class="mb-4">
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">

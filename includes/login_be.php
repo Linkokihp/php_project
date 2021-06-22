@@ -87,9 +87,9 @@
 
 					// if user is admin, redirect to admin area
 					if ( in_array($_SESSION['user']['role'], ["Admin", "Author"])) {
-						$_SESSION['message'] = "You are now logged in";
 						$_SESSION['isloggedin'] = true;
 						$_SESSION['login_timestamp'] = time();
+						$_SESSION['logoutmessage'] = "Your session expired! Please login again!";
 						// redirect to admin area
 						header('location: ' . BASE_URL . '/admin/dashboard.php');
 						exit(0);
@@ -97,11 +97,11 @@
 				} else {
 					array_push($errors, 'Wrong credentials');
 				} 
-		} else {
-			array_push($errors, 'No User found');
+			} else {
+				array_push($errors, 'No User found');
+				}
 		}
 	}
-}
 
 
 	// escape value from form

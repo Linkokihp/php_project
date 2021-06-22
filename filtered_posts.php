@@ -10,7 +10,7 @@
 
 	$roles = ['Admin','Author'];	
 ?>
-	<title>Euroblog | Home </title>
+	<title>Euroblog | Filtered posts</title>
 </head>
 <body>
 <!-- Navbar -->
@@ -52,5 +52,5 @@
                 </div>
             </div>
         </div>
-	<!-- Footer -->
-	<?php include( ROOT_PATH . '/includes/footer.php'); ?>
+<!-- Footer -->
+<?php include( ROOT_PATH . '/includes/footer.php'); ?>

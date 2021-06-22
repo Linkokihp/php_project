@@ -47,6 +47,7 @@ if (isset($_GET['delete-admin'])) {
 	deleteAdmin($admin_id);
 }
 
+
 /* - - - - - - - - - - - -
 -  Admin users functions
 - - - - - - - - - - - - -*/
@@ -172,8 +173,6 @@ function getAdminUsers(){
 }
 
 
-
-
 /* * * * * * * * * * * * * * * * * * * * *
 * - Escapes form submitted value, hence, preventing SQL injection
 * * * * * * * * * * * * * * * * * * * * * */
@@ -215,6 +214,7 @@ if (isset($_GET['delete-topic'])) {
 	$topic_id = $_GET['delete-topic'];
 	deleteTopic($topic_id);
 }
+
 
 /* - - - - - - - - - - 
 -  Topics functions

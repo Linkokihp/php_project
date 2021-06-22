@@ -3,21 +3,20 @@
 <?php include(ROOT_PATH . '/admin/includes/post_functions.php'); ?>
 <?php include(ROOT_PATH . '/admin/includes/head_section.php'); ?>
 <?php
-$session_laufzeit = 5*60; // so lange zurück darf der session timestamp liegen
-$localtime = time();
+  $session_laufzeit = 5*60;
+  $localtime = time();
 
-// prüfen, ob es eine Session mit isloggedin ($_SESSION['isloggedin']) gibt und den Timestamp von jetzt aus time() mit dem Wert aus $_SESSION['login_timestamp'] vergleichen
-if( isset($_SESSION['isloggedin'])){
-	if($_SESSION['isloggedin'] != true || ($_SESSION['login_timestamp'] + $session_laufzeit) < $localtime) {
-		// wenn die Session nicht existiert oder der timestamp weiter zurückliegt als die erlaubte laufzeit (= kein Zugriff), soll auf das login umgeleitet werden
-		header('location: ../login.php');
-		exit;// Tipp: das Script darf im Fall, dass kein Zugriff besteht, nciht weiterlaufen, hierfür sollte exit() oder die() verwendet werden
-	};
-}	else{
-	// wenn die Session nicht existiert oder der timestamp weiter zurückliegt als die erlaubte laufzeit (= kein Zugriff), soll auf das login umgeleitet werden
-		header('location: ../login.php');
-		exit;// Tipp: das Script darf im Fall, dass kein Zugriff besteht, nciht weiterlaufen, hierfür sollte exit() oder die() verwendet werden
-};
+  if( isset($_SESSION['isloggedin'])){
+    if($_SESSION['isloggedin'] != true || ($_SESSION['login_timestamp'] + $session_laufzeit) < $localtime) {
+      $_SESSION['logoutmessage'] = "Your session has been expired! Please login again!";
+      header('location: ../login.php');
+      exit;
+    };
+  }	else{
+    $_SESSION['logoutmessage'] = "Your session has been expired! Please login again!";
+      header('location: ../login.php');
+      exit;
+  };
 ?>
 <!-- Get all admin posts from DB -->
 <?php $posts = getAllPosts(); ?>
@@ -87,9 +86,7 @@ if( isset($_SESSION['isloggedin'])){
         <a href="<?php echo BASE_URL . '/admin/users.php' ?>"><i class="fa fa-link"></i><span>Manage Users</span></a>
         </li>
       </ul>
-      <!-- /.sidebar-menu -->
     </section>
-    <!-- /.sidebar -->
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
@@ -167,9 +164,7 @@ if( isset($_SESSION['isloggedin'])){
 				</table>
 			<?php endif ?>
 		</div>
-		<!-- // Display records from DB -->
   </div>
-  <!-- /.content-wrapper -->
 
   <!-- Main Footer -->
   <footer class="main-footer">
@@ -202,7 +197,6 @@ if( isset($_SESSION['isloggedin'])){
             </a>
           </li>
         </ul>
-        <!-- /.control-sidebar-menu -->
 
         <h3 class="control-sidebar-heading">Tasks Progress</h3>
         <ul class="control-sidebar-menu">
@@ -221,13 +215,9 @@ if( isset($_SESSION['isloggedin'])){
             </a>
           </li>
         </ul>
-        <!-- /.control-sidebar-menu -->
-
       </div>
-      <!-- /.tab-pane -->
       <!-- Stats tab content -->
       <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      <!-- /.tab-pane -->
       <!-- Settings tab content -->
       <div class="tab-pane" id="control-sidebar-settings-tab">
         <form method="post">
@@ -243,21 +233,14 @@ if( isset($_SESSION['isloggedin'])){
               Some information about this general settings option
             </p>
           </div>
-          <!-- /.form-group -->
         </form>
       </div>
-      <!-- /.tab-pane -->
     </div>
   </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-  immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
 </div>
-<!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
-
 <!-- jQuery 3 -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->

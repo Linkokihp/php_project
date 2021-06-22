@@ -2,18 +2,20 @@
 <?php include(ROOT_PATH . '/admin/includes/admin_functions.php'); ?>
 <?php include(ROOT_PATH . '/admin/includes/head_section.php'); ?>
 <?php
-$session_laufzeit = 5*60;
-$localtime = time();
+  $session_laufzeit = 5*60;
+  $localtime = time();
 
-if( isset($_SESSION['isloggedin'])){
-	if($_SESSION['isloggedin'] != true || ($_SESSION['login_timestamp'] + $session_laufzeit) < $localtime) {
-		header('location: ../login.php');
-		exit;
-	};
-}	else{
-		header('location: ../login.php');
-		exit;
-};
+  if( isset($_SESSION['isloggedin'])){
+    if($_SESSION['isloggedin'] != true || ($_SESSION['login_timestamp'] + $session_laufzeit) < $localtime) {
+      $_SESSION['logoutmessage'] = "Your session has been expired! Please login again!";
+      header('location: ../login.php');
+      exit;
+    };
+  }	else{
+    $_SESSION['logoutmessage'] = "Your session has been expired! Please login again!";
+      header('location: ../login.php');
+      exit;
+  };
 ?>
 <?php 
 	// Get all admin users from DB

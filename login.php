@@ -1,6 +1,12 @@
-<?php  include('config.php'); ?>
-<?php  include('includes/login_be.php'); ?>
-<?php  include('includes/head_section.php'); ?>
+<?php include('config.php'); ?>
+<?php include('includes/login_be.php'); ?>
+<?php include('includes/head_section.php'); ?>
+<?php
+	if (isset($_SESSION['logoutmessage'])) {
+		echo '<script type="text/javascript">alert("' . $_SESSION['logoutmessage'] . '");</script>';
+		unset($_SESSION['logoutmessage']);
+	}
+?>
 	<title>Eurotrip - Blog | Login</title>
 </head>
 <body>
@@ -28,4 +34,4 @@
 		<?php include(ROOT_PATH . '/includes/errors.php') ?>
 	</div>
 <!-- Footer -->
-	<?php include( ROOT_PATH . '/includes/footer.php'); ?>
+<?php include( ROOT_PATH . '/includes/footer.php'); ?>
